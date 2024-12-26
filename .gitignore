@@ -1,0 +1,82 @@
+# Ignore system files and logs
+*.lock
+*.log
+*.dat
+*.ini
+.DS_Store
+Thumbs.db
+desktop.ini
+NTUSER.*
+*.lnk
+
+# Ignore Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.ipynb_checkpoints
+
+# Ignore Node.js artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore IDEs and editor settings
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Ignore Anaconda/Conda environments
+anaconda3/
+miniconda3/
+.conda/
+.condarc
+.continuum/
+.spyder-py3/
+
+# Ignore personal directories and system-generated folders
+AppData/
+Application Data/
+Cookies/
+Documents/My Music/
+Documents/My Pictures/
+Documents/My Videos/
+Local Settings/
+MicrosoftEdgeBackups/
+My Documents/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+Start Menu/
+Templates/
+
+# Other directories and files
+Desktop/
+Documents/
+Downloads/
+Favorites/
+Music/
+Pictures/
+Videos/
+Contacts/
+Saved Games/
+Searches/
+OneDrive*/
+*.ipynb
+*.php
+*.sh
+combine_parquet_files_cleaned.py
+extract.php
+get-pip.py
+untitled1.py
+package-lock.json
+package.json
+pankaj/
+ra-backned-dev/
+myenv/
+
+# Exclude gitignore itself
+!.gitignore

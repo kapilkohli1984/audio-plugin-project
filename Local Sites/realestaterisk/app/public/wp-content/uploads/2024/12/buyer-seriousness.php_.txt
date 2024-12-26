@@ -1,0 +1,82 @@
+<?php
+/*
+Plugin Name: Buyer Seriousness Assessment
+Description: Evaluates buyer seriousness based on user input.
+Version: 1.0
+Author: Your Name
+*/
+
+// Add a shortcode to display the form
+function buyer_seriousness_form() {
+    // HTML Form for user input
+    return '
+    <form method="post">
+        <label>Credit Score (CS): </label>
+        <input type="number" name="credit_score" min="0" max="850" required>
+        <br><br>
+
+        <label>Pre-Approved (Yes/No): </label>
+        <select name="pre_approved" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <br><br>
+
+        <label>Using a Realtor? (Yes/No): </label>
+        <select name="realtor" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <br><br>
+
+        <label>Has Listed Current Home? (Yes/No): </label>
+        <select name="listed" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <br><br>
+
+        <label>Looking Seriously at Multiple Homes? (Yes/No): </label>
+        <select name="multiple" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+        <br><br>
+
+        <label>Payment Method (Cash/Finance): </label>
+        <select name="cash" required>
+            <option value="Cash">Cash</option>
+            <option value="Finance">Finance</option>
+        </select>
+        <br><br>
+
+        <input type="submit" name="submit" value="Evaluate">
+    </form>
+    ' . (isset($_POST['submit']) ? buyer_seriousness_evaluate() : '');
+}
+add_shortcode('buyer_form', 'buyer_seriousness_form');
+
+// Logic for evaluating seriousness
+function buyer_seriousness_evaluate() {
+    // Collect user input
+    $cs = isset($_POST['credit_score']) ? intval($_POST['credit_score']) : 0;
+    $preApp = isset($_POST['pre_approved']) && $_POST['pre_approved'] == 'Yes' ? 10 : 0;
+    $realtor = isset($_POST['realtor']) && $_POST['realtor'] == 'Yes' ? 10 : 0;
+    $listed = isset($_POST['listed']) && $_POST['listed'] == 'Yes' ? 10 : 0;
+    $multiple = isset($_POST['multiple']) && $_POST['multiple'] == 'Yes' ? 10 : 0;
+    $cash = isset($_POST['cash']) && $_POST['cash'] == 'Cash' ? 10 : 0;
+
+    // Calculate scores based on your logic
+    $totalScore = ($cs / 100) + $preApp + $realtor + $listed + $multiple + $cash;
+    $finalScore = $totalScore / 6; // Adjust as per your logic
+
+    // Determine seriousness
+    $seriousness = $finalScore >= 5 ? 'Serious Buyer' : 'Not Serious Buyer';
+
+    // Display results
+    return "
+    <h3>Results:</h3>
+    <p>Final Score: $finalScore</p>
+    <p>Seriousness: $seriousness</p>
+    ";
+}
